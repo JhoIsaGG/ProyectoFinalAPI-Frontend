@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Ticket - Mesa de Ayuda</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .meta-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .meta-item strong {
+            color: var(--text-secondary);
+        }
+        .meta-item span {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Content Area -->
+        <div class="app-content">
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+            
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title" id="ticket-id-title">Ticket #...</h1>
+                        <p class="page-subtitle" id="ticket-subtitle">Cargando detalles...</p>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="btn-delete-ticket" class="btn btn-danger" style="display: none;">
+                            Eliminar Ticket
+                        </button>
+                        <a href="./dashboard.html" class="btn btn-secondary">
+                            Volver a la bandeja
+                        </a>
+                    </div>
+                </div>
+
+                <div id="alert-error" class="badge badge-danger w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;">
+                    Ocurrió un error.
+                </div>
+
+                <div class="ticket-grid">
+                    <!-- Left side: Description & Comments -->
+                    <div>
+                        <!-- Description Card -->
+                        <div class="card">
+                            <h3 class="card-title">Descripción</h3>
+                            <p id="ticket-descripcion" style="white-space: pre-wrap; font-size: 1rem; color: var(--text-secondary); line-height: 1.6;"></p>
+                        </div>
+
+                        <!-- Comments Section -->
+                        <div class="card">
+                            <h3 class="card-title" style="margin-bottom: 20px;">Historial de Comentarios</h3>
+                            
+                            <!-- Comment feed -->
+                            <div id="comments-feed" class="comments-list">
+                                <div class="text-center" style="color: var(--text-light); padding: 20px;">
+                                    Cargando comentarios...
+                                </div>
+                            </div>
+
+                            <!-- Comment form -->
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 24px; margin-top: 24px;">
+                                <h4 style="font-weight: 700; margin-bottom: 12px; font-size: 0.95rem;">Agregar Comentario</h4>
+                                <form id="comment-form">
+                                    <div class="form-group">
+                                        <textarea id="comment-text" class="form-control" rows="4" placeholder="Escribe un comentario o actualización de soporte..." required></textarea>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-primary">
+                                            Guardar Comentario
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right side: Sidebar Meta / Actions -->
+                    <div>
+                        <!-- Information panel -->
+                        <div class="card">
+                            <h3 class="card-title">Detalles</h3>
+                            
+                            <div class="meta-list">
+                                <div class="meta-item">
+                                    <strong>Categoría:</strong>
+                                    <span id="ticket-categoria">Cargando...</span>
+                                </div>
+                                <div class="meta-item">
+                                    <strong>Prioridad:</strong>
+                                    <span id="ticket-prioridad">Cargando...</span>
+                                </div>
+                                <div class="meta-item">
+                                    <strong>Estado:</strong>
+                                    <span id="ticket-estado">Cargando...</span>
+                                </div>
+                                <div class="meta-item">
+                                    <strong>Asignado a:</strong>
+                                    <span id="ticket-agente">Sin asignar</span>
+                                </div>
+                                <div class="meta-item">
+                                    <strong>Creado por:</strong>
+                                    <span id="ticket-creador">Cargando...</span>
+                                </div>
+                                <div class="meta-item">
+                                    <strong>Creado el:</strong>
+                                    <span id="ticket-fecha">Cargando...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update State panel -->
+                        <div class="card" id="panel-estado-cambio" style="display: none;">
+                            <h3 class="card-title">Gestionar Estado</h3>
+                            
+                            <form id="update-status-form">
+                                <div class="form-group">
+                                    <label for="select-cambio-estado" class="form-label">Cambiar Estado a:</label>
+                                    <select id="select-cambio-estado" class="form-control">
+                                        <!-- Cargado de la API -->
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-full">
+                                    Actualizar Estado
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Injectable Components -->
+    <script type="module" src="../js/presentation/components/navbar.js"></script>
+    <script type="module" src="../js/presentation/components/sidebar.js"></script>
+    <!-- Page Controller -->
+    <script type="module" src="../js/presentation/controllers/ticket-detail-controller.js"></script>
+</body>
+</html>

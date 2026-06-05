@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles - Mesa de Ayuda</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Content Area -->
+        <div class="app-content">
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+            
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Gestión de Roles</h1>
+                        <p class="page-subtitle">Administra los roles del sistema y sus descripciones</p>
+                    </div>
+                    <button id="btn-nuevo-catalogo" class="btn btn-primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                        Nuevo Rol
+                    </button>
+                </div>
+
+                <div id="alert-error-global" class="badge badge-danger w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;"></div>
+
+                <!-- Catalog Table -->
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th style="width: 160px; text-align: center;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="catalogo-list">
+                            <tr>
+                                <td colspan="5" class="text-center" style="padding: 30px; color: var(--text-light);">
+                                    Cargando roles...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="catalogo-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Nuevo Rol</h3>
+                <button id="modal-close" class="modal-close">&times;</button>
+            </div>
+            <form id="catalogo-form">
+                <input type="hidden" id="item-id">
+                <div class="modal-body">
+                    <div id="alert-error-modal" class="badge badge-danger w-full text-center" style="display: none; padding: 10px; margin-bottom: 15px;"></div>
+
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre del Rol</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Administrador" required>
+                        <div id="error-nombre" class="form-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" id="descripcion" class="form-control" placeholder="Escribe el alcance de este rol" required>
+                        <div id="error-descripcion" class="form-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select id="estado" class="form-control">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                        <div id="error-estado" class="form-error"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-cancel" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Rol</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Injectable Components -->
+    <script type="module" src="../js/presentation/components/navbar.js"></script>
+    <script type="module" src="../js/presentation/components/sidebar.js"></script>
+    <!-- Page Controller -->
+    <script type="module" src="../js/presentation/controllers/rol-controller.js"></script>
+</body>
+</html>

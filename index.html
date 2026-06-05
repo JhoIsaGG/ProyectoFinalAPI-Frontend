@@ -3,91 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quesitrix Management System - Dashboard</title>
-    
-    <!-- Hojas de Estilos -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
+    <title>Mesa de Ayuda - API Frontend</title>
+    <script type="module">
+        import { authRepository } from './js/data/auth-repository.js';
+        
+        if (authRepository.isAuthenticated()) {
+            window.location.href = './views/dashboard.html';
+        } else {
+            window.location.href = './views/login.html';
+        }
+    </script>
 </head>
 <body>
-
-    <div class="app-container">
-        <!-- Navbar Superior Premium -->
-        <header class="navbar" id="app-navbar">
-            <div class="navbar-brand">
-                <!-- Icono de escudo/llave -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="28" height="28">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                <span>Quesitrix API Control</span>
-            </div>
-            
-            <nav>
-                <ul class="navbar-menu">
-                    <li class="navbar-item active" data-resource="usuarios">
-                        <a href="#usuarios">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" style="margin-right: 4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                            Usuarios
-                        </a>
-                    </li>
-                    <li class="navbar-item" data-resource="roles">
-                        <a href="#roles">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" style="margin-right: 4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                            Roles
-                        </a>
-                    </li>
-                    <li class="navbar-item" data-resource="departamentos">
-                        <a href="#departamentos">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" style="margin-right: 4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                            Departamentos
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Tarjetas de Estadísticas Principales -->
-        <section class="stats-container" id="stats-container">
-            <!-- Renderizado dinámico desde JS -->
-        </section>
-
-        <!-- Contenido CRUD Dinámico -->
-        <main id="app-content">
-            <!-- Renderizado dinámico de la tabla actual desde JS -->
-        </main>
+    <div style="font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <p>Redirigiendo...</p>
     </div>
-
-    <!-- Modal global reusable para Formularios de Creación / Edición -->
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Formulario</h3>
-                <button class="btn btn-secondary btn-sm btn-icon-only" id="btn-modal-close" title="Cerrar modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- El formulario se inyecta dinámicamente -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-modal-cancel">Cancelar</button>
-                <button class="btn btn-primary" id="btn-modal-save">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contenedor para Notificaciones flotantes tipo Toast -->
-    <div id="toast-container" class="toast-container"></div>
-
-    <!-- Script principal de la aplicación como Módulo -->
-    <script type="module" src="js/main.js"></script>
 </body>
 </html>

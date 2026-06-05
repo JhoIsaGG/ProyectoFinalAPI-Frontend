@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Mesa de Ayuda</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Content Area -->
+        <div class="app-content">
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+            
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Gestión de Usuarios</h1>
+                        <p class="page-subtitle">Administra los usuarios del sistema, sus roles y departamentos</p>
+                    </div>
+                    <button id="btn-nuevo-usuario" class="btn btn-primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                        Nuevo Usuario
+                    </button>
+                </div>
+
+                <div id="alert-error-global" class="badge badge-danger w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;"></div>
+
+                <!-- Users Table -->
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Departamento</th>
+                                <th>Estado</th>
+                                <th style="width: 160px; text-align: center;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuarios-list">
+                            <tr>
+                                <td colspan="8" class="text-center" style="padding: 30px; color: var(--text-light);">
+                                    Cargando usuarios...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="usuario-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Nuevo Usuario</h3>
+                <button id="modal-close" class="modal-close">&times;</button>
+            </div>
+            <form id="usuario-form">
+                <input type="hidden" id="usuario-id">
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div id="alert-error-modal" class="badge badge-danger w-full text-center" style="display: none; padding: 10px; margin-bottom: 15px;"></div>
+
+                    <div class="filters-bar" style="margin-bottom: 0; align-items: stretch;">
+                        <div class="filter-item">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" class="form-control" required>
+                            <div id="error-nombre" class="form-error"></div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" id="apellido" class="form-control" required>
+                            <div id="error-apellido" class="form-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" id="email" class="form-control" required>
+                        <div id="error-email" class="form-error"></div>
+                    </div>
+
+                    <div class="filters-bar" style="margin-bottom: 0; align-items: stretch;">
+                        <div class="filter-item">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" id="telefono" class="form-control" required>
+                            <div id="error-telefono" class="form-error"></div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" id="password" class="form-control" placeholder="Escribe la contraseña">
+                            <span style="font-size: 0.75rem; color: var(--text-light);">* Requerido al crear o cambiar.</span>
+                            <div id="error-password" class="form-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="filters-bar" style="margin-bottom: 0; align-items: stretch;">
+                        <div class="filter-item">
+                            <label for="rol_id" class="form-label">Rol</label>
+                            <select id="rol_id" class="form-control" required>
+                                <option value="" disabled selected>Seleccione...</option>
+                            </select>
+                            <div id="error-rol_id" class="form-error"></div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="departamento_id" class="form-label">Departamento</label>
+                            <select id="departamento_id" class="form-control" required>
+                                <option value="" disabled selected>Seleccione...</option>
+                            </select>
+                            <div id="error-departamento_id" class="form-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select id="estado" class="form-control">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                        <div id="error-estado" class="form-error"></div>
+                    </div>
+
+                    <!-- Agent Categories (Visible only if rol_id === 2) -->
+                    <div class="form-group" id="group-categorias-agente" style="display: none; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                        <label class="form-label">Categorías a las que da Soporte (Múltiples)</label>
+                        <span style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 8px;">Presiona Ctrl (o Cmd) para seleccionar varias categorías:</span>
+                        <select id="categoria_ticket_id" class="form-control" multiple style="height: 100px;">
+                            <!-- Categorías cargadas dinámicamente -->
+                        </select>
+                        <div id="error-categoria_ticket_id" class="form-error"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-cancel" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Injectable Components -->
+    <script type="module" src="../js/presentation/components/navbar.js"></script>
+    <script type="module" src="../js/presentation/components/sidebar.js"></script>
+    <!-- Page Controller -->
+    <script type="module" src="../js/presentation/controllers/usuario-controller.js"></script>
+</body>
+</html>

@@ -29,30 +29,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAdmin) {
         adminMenuHtml = `
             <div class="menu-category">Administración</div>
-            
-            <a href="/Proyectofinal/views/usuarios.html" class="menu-item ${isActive('usuarios.html')}">
+           
+
+            <a href="./usuarios.html" class="menu-item ${isActive('usuarios.html')}">
                 ${svgUsers} Usuarios
             </a>
             
-            <a href="/Proyectofinal/views/roles.html" class="menu-item ${isActive('roles.html')}">
+            <a href="./roles.html" class="menu-item ${isActive('roles.html')}">
                 ${svgRoles} Roles
             </a>
             
-            <a href="/Proyectofinal/views/departamentos.html" class="menu-item ${isActive('departamentos.html')}">
+            <a href="./departamentos.html" class="menu-item ${isActive('departamentos.html')}">
                 ${svgDept} Departamentos
             </a>
             
             <div class="menu-category">Catálogos de Ticket</div>
             
-            <a href="/Proyectofinal/views/categorias.html" class="menu-item ${isActive('categorias.html')}">
+            <a href="./categorias.html" class="menu-item ${isActive('categorias.html')}">
                 ${svgCat} Categorías
             </a>
             
-            <a href="/Proyectofinal/views/estados.html" class="menu-item ${isActive('estados.html')}">
+            <a href="./estados.html" class="menu-item ${isActive('estados.html')}">
                 ${svgStatus} Estados
             </a>
             
-            <a href="/Proyectofinal/views/prioridades.html" class="menu-item ${isActive('prioridades.html')}">
+            <a href="./prioridades.html" class="menu-item ${isActive('prioridades.html')}">
                 ${svgPrio} Prioridades
             </a>
         `;
@@ -66,11 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="sidebar-menu">
                 <div class="menu-category">Panel Principal</div>
                 
-                <a href="/Proyectofinal/views/dashboard.html" class="menu-item ${isActive('dashboard.html')} ${isActive('ticket-detalle.html')}">
+                <a href="./dashboard.html" class="menu-item ${isActive('dashboard.html')} ${isActive('ticket-detalle.html')}">
                     ${svgDashboard} Bandeja de Tickets
                 </a>
                 
-                <a href="/Proyectofinal/views/ticket-crear.html" class="menu-item ${isActive('ticket-crear.html')}">
+                <a href="./ticket-crear.html" class="menu-item ${isActive('ticket-crear.html')}">
                     ${svgPlus} Crear Ticket
                 </a>
 

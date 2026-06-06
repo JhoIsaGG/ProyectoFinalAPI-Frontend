@@ -39,16 +39,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        // Poblar estados y preseleccionar 'Abierto' (normalmente ID 1)
-        stats.forEach(s => {
-            if (Number(s.estado) === 1) {
-                const opt = new Option(s.nombre, s.id);
-                if (s.nombre.toLowerCase() === 'abierto') {
-                    opt.selected = true;
-                }
-                selectEstado.add(opt);
+        // Buscar el estado 'Abierto' (o 'abierto')
+        const openState = stats.find(s => s.nombre.toLowerCase() === 'abierto' && Number(s.estado) === 1);
+        if (openState) {
+            selectEstado.value = openState.id;
+            document.getElementById('estado-display').value = openState.nombre;
+        } else {
+            // Fallback por si no lo encuentra o está inactivo
+            const defaultState = stats.find(s => Number(s.estado) === 1);
+            if (defaultState) {
+                selectEstado.value = defaultState.id;
+                document.getElementById('estado-display').value = defaultState.nombre;
             }
-        });
+        }
 
     } catch (error) {
         console.error('Error al cargar catálogos:', error);
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         // Resetear errores anteriores
         hideErrors();
         alertError.style.display = 'none';
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } catch (error) {
             console.error('Error al crear ticket:', error);
-            
+
             if (error.errors) {
                 // Mostrar errores de validación de campos específicos
                 Object.keys(error.errors).forEach(field => {

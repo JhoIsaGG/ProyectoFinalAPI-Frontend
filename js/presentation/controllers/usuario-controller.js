@@ -36,10 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectRol = document.getElementById('rol_id');
     const selectDepto = document.getElementById('departamento_id');
     const selectEstado = document.getElementById('estado');
-    
+    const grupoEstado = document.getElementById('group-estado');
+
     // Agente
     const groupCategoriasAgente = document.getElementById('group-categorias-agente');
-    const selectCategorias = document.getElementById('categoria_ticket_id');
+    const contenedorCategorias = document.getElementById('categorias-checkboxes-container');
 
     let allUsers = [];
     const roleMap = {};
@@ -73,7 +74,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         cats.forEach(c => {
             if (Number(c.estado) === 1) {
-                selectCategorias.add(new Option(c.nombre, c.id));
+                const divGrupo = document.createElement('div');
+                divGrupo.className = 'checkbox-group';
+
+                const checkboxCategoria = document.createElement('input');
+                checkboxCategoria.type = 'checkbox';
+                checkboxCategoria.id = `chk-cat-${c.id}`;
+                checkboxCategoria.name = 'categorias_soporte';
+                checkboxCategoria.value = c.id;
+
+                const labelCategoria = document.createElement('label');
+                labelCategoria.htmlFor = `chk-cat-${c.id}`;
+                labelCategoria.innerText = c.nombre;
+                labelCategoria.style.fontSize = '0.9rem';
+                labelCategoria.style.color = 'var(--text-primary)';
+                labelCategoria.style.cursor = 'pointer';
+
+                divGrupo.appendChild(checkboxCategoria);
+                divGrupo.appendChild(labelCategoria);
+                contenedorCategorias.appendChild(divGrupo);
             }
         });
 
@@ -121,9 +140,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         usuariosList.innerHTML = allUsers.map(user => {
             const roleName = roleMap[user.rol_id] || `Rol ${user.rol_id}`;
             const deptoName = deptoMap[user.departamento_id] || `Depto ${user.departamento_id}`;
-            
+
             const isUserActive = Number(user.estado) === 1;
-            const statusBadge = isUserActive 
+            const statusBadge = isUserActive
                 ? '<span class="badge badge-success">Activo</span>'
                 : '<span class="badge badge-neutral">Inactivo</span>';
 
@@ -161,6 +180,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         inputId.value = '';
         inputPassword.required = true;
         groupCategoriasAgente.style.display = 'none';
+        selectEstado.value = '1';
+        grupoEstado.style.display = 'none';
+
+        // Desmarcar todas las categorías
+        const checkboxesCategorias = contenedorCategorias.querySelectorAll('input[name="categorias_soporte"]');
+        checkboxesCategorias.forEach(chk => {
+            chk.checked = false;
+        });
+
         hideErrors();
         alertErrorModal.style.display = 'none';
         modal.classList.add('show');
@@ -170,7 +198,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = `Editar Usuario #${id}`;
         form.reset();
         inputId.value = id;
-        inputPassword.required = false; // No obligatorio al editar
+        inputPassword.required = true; // Obligatorio al editar para poder guardar
+        grupoEstado.style.display = 'block';
         hideErrors();
         alertErrorModal.style.display = 'none';
 
@@ -188,11 +217,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar u ocultar categorías de agente
         if (Number(user.rol_id) === 2) {
             groupCategoriasAgente.style.display = 'block';
-            
+
             // Seleccionar categorías del agente
             const selectedCats = user.categoria_ticket_id || [];
-            Array.from(selectCategorias.options).forEach(opt => {
-                opt.selected = selectedCats.includes(Number(opt.value));
+            const checkboxesCategorias = contenedorCategorias.querySelectorAll('input[name="categorias_soporte"]');
+            checkboxesCategorias.forEach(chk => {
+                chk.checked = selectedCats.includes(Number(chk.value));
             });
         } else {
             groupCategoriasAgente.style.display = 'none';
@@ -229,20 +259,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             updated_by: currentUser.id
         };
 
-        // Si se ingresó contraseña, o es creación (donde es required), adjuntarla
-        if (inputPassword.value) {
-            payload.password = inputPassword.value;
-        }
-
-        if (!isEditing && !inputPassword.value) {
-            showModalError('La contraseña es obligatoria al crear un usuario.');
+        // La contraseña es obligatoria tanto al crear como al editar
+        if (!inputPassword.value) {
+            showModalError('La contraseña es obligatoria.');
             return;
         }
+        payload.password = inputPassword.value;
 
         // Si es agente, extraer categorías
         if (Number(selectRol.value) === 2) {
-            const selectedOptions = Array.from(selectCategorias.selectedOptions);
-            payload.categoria_ticket_id = selectedOptions.map(opt => Number(opt.value));
+            const checkboxesCategorias = contenedorCategorias.querySelectorAll('input[name="categorias_soporte"]:checked');
+            payload.categoria_ticket_id = Array.from(checkboxesCategorias).map(chk => Number(chk.value));
         }
 
         try {

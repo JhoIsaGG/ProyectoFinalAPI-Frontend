@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputNombre = document.getElementById('nombre');
     const inputDescripcion = document.getElementById('descripcion');
     const selectEstado = document.getElementById('estado');
+    const grupoEstado = document.getElementById('group-estado');
 
     // Botones modal
     const btnNuevo = document.getElementById('btn-nuevo-catalogo');
@@ -92,6 +93,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = 'Nuevo Rol';
         form.reset();
         inputId.value = '';
+        selectEstado.value = '1';
+        grupoEstado.style.display = 'none';
         hideErrors();
         alertErrorModal.style.display = 'none';
         modal.classList.add('show');
@@ -101,6 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = `Editar Rol #${id}`;
         form.reset();
         inputId.value = id;
+        grupoEstado.style.display = 'block';
         hideErrors();
         alertErrorModal.style.display = 'none';
 

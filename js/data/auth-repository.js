@@ -22,7 +22,9 @@ export const authRepository = {
 
     logout() {
         localStorage.removeItem(CONFIG.SESSION_KEY);
-        window.location.href = '/proyectofinalapi/Frontend/views/login.html';
+        const currentPath = window.location.pathname;
+        const loginPath = currentPath.includes('/views/') ? './login.html' : './views/login.html';
+        window.location.href = loginPath;
     },
 
     getCurrentUser() {
@@ -50,7 +52,8 @@ export const authRepository = {
             // Obtener ruta relativa correcta del login
             const currentPath = window.location.pathname;
             if (!currentPath.endsWith('login.html')) {
-                window.location.href = '/proyectofinalapi/Frontend/views/login.html';
+                const loginPath = currentPath.includes('/views/') ? './login.html' : './views/login.html';
+                window.location.href = loginPath;
             }
         }
     }

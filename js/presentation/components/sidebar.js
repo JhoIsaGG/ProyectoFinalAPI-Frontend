@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAdmin) {
         adminMenuHtml = `
             <div class="menu-category">Administración</div>
-            
+           
+
             <a href="./usuarios.html" class="menu-item ${isActive('usuarios.html')}">
                 ${svgUsers} Usuarios
             </a>

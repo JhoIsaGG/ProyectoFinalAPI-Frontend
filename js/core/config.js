@@ -4,9 +4,9 @@
 // o usa localhost si se abre directamente por archivo (file://)
 const getBaseUrl = () => {
     if (window.location.protocol === 'file:') {
-        return 'http://localhost/proyectofinalapi/public/api';
+        return 'http://192.168.137.20/api';
     }
-    return `${window.location.origin}/proyectofinalapi/public/api`;
+    return `http://192.168.137.20//api`;
 };
 
 export const CONFIG = {

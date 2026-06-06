@@ -6,7 +6,7 @@ const getBaseUrl = () => {
     if (window.location.protocol === 'file:') {
         return 'http://192.168.137.20/api';
     }
-    return `${window.location.origin}/api`;
+    return `http://192.168.137.20//api`;
 };
 
 export const CONFIG = {

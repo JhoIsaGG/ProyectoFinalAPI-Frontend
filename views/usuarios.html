@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="app-layout">
         <!-- Sidebar -->
         <div id="sidebar-container"></div>
-        
+
         <!-- Content Area -->
         <div class="app-content">
             <!-- Navbar -->
             <div id="navbar-container"></div>
-            
+
             <!-- Main Content -->
             <main class="main-content">
                 <div class="page-header">
@@ -28,12 +30,16 @@
                         <p class="page-subtitle">Administra los usuarios del sistema, sus roles y departamentos</p>
                     </div>
                     <button id="btn-nuevo-usuario" class="btn btn-primary">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                        </svg>
                         Nuevo Usuario
                     </button>
                 </div>
 
-                <div id="alert-error-global" class="badge badge-danger w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;"></div>
+                <div id="alert-error-global" class="badge badge-danger w-full text-center"
+                    style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;"></div>
 
                 <!-- Users Table -->
                 <div class="table-container">
@@ -73,7 +79,8 @@
             <form id="usuario-form">
                 <input type="hidden" id="usuario-id">
                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <div id="alert-error-modal" class="badge badge-danger w-full text-center" style="display: none; padding: 10px; margin-bottom: 15px;"></div>
+                    <div id="alert-error-modal" class="badge badge-danger w-full text-center"
+                        style="display: none; padding: 10px; margin-bottom: 15px;"></div>
 
                     <div class="filters-bar" style="margin-bottom: 0; align-items: stretch;">
                         <div class="filter-item">
@@ -102,8 +109,10 @@
                         </div>
                         <div class="filter-item">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" id="password" class="form-control" placeholder="Escribe la contraseña">
-                            <span style="font-size: 0.75rem; color: var(--text-light);">* Requerido al crear o cambiar.</span>
+                            <input type="password" id="password" class="form-control"
+                                placeholder="Escribe la contraseña">
+                            <span style="font-size: 0.75rem; color: var(--text-light);">* Requerido al crear o
+                                cambiar.</span>
                             <div id="error-password" class="form-error"></div>
                         </div>
                     </div>
@@ -135,12 +144,13 @@
                     </div>
 
                     <!-- Agent Categories (Visible only if rol_id === 2) -->
-                    <div class="form-group" id="group-categorias-agente" style="display: none; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                    <div class="form-group" id="group-categorias-agente"
+                        style="display: none; border-top: 1px solid var(--border-color); padding-top: 12px;">
                         <label class="form-label">Categorías a las que da Soporte (Múltiples)</label>
-                        <span style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 8px;">Presiona Ctrl (o Cmd) para seleccionar varias categorías:</span>
-                        <select id="categoria_ticket_id" class="form-control" multiple style="height: 100px;">
-                            <!-- Categorías cargadas dinámicamente -->
-                        </select>
+                        <div id="categorias-checkboxes-container"
+                            style="display: flex; flex-direction: column; gap: 8px; max-height: 150px; overflow-y: auto; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); background-color: var(--bg-secondary);">
+                            <!-- Checkboxes cargados dinámicamente -->
+                        </div>
                         <div id="error-categoria_ticket_id" class="form-error"></div>
                     </div>
                 </div>
@@ -158,4 +168,5 @@
     <!-- Page Controller -->
     <script type="module" src="../js/presentation/controllers/usuario-controller.js"></script>
 </body>
+
 </html>

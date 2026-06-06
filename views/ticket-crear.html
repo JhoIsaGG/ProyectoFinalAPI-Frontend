@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="app-layout">
         <!-- Sidebar -->
         <div id="sidebar-container"></div>
-        
+
         <!-- Content Area -->
         <div class="app-content">
             <!-- Navbar -->
             <div id="navbar-container"></div>
-            
+
             <!-- Main Content -->
             <main class="main-content">
                 <div class="page-header">
@@ -33,23 +35,27 @@
                 </div>
 
                 <div class="card" style="max-width: 800px; margin: 0 auto;">
-                    <div id="alert-error" class="badge badge-danger w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;">
+                    <div id="alert-error" class="badge badge-danger w-full text-center"
+                        style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;">
                         Ocurrió un error.
                     </div>
-                    <div id="alert-success" class="badge badge-success w-full text-center" style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;">
+                    <div id="alert-success" class="badge badge-success w-full text-center"
+                        style="display: none; padding: 12px; margin-bottom: 20px; font-weight: 500;">
                         Ticket creado correctamente. Redirigiendo...
                     </div>
 
                     <form id="create-ticket-form">
                         <div class="form-group">
                             <label for="titulo" class="form-label">Título del Ticket</label>
-                            <input type="text" id="titulo" class="form-control" placeholder="Escribe un título breve y descriptivo" required>
+                            <input type="text" id="titulo" class="form-control"
+                                placeholder="Escribe un título breve y descriptivo" required>
                             <div id="error-titulo" class="form-error"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="descripcion" class="form-label">Descripción Detallada</label>
-                            <textarea id="descripcion" class="form-control" rows="6" placeholder="Describe detalladamente el problema o solicitud" required></textarea>
+                            <textarea id="descripcion" class="form-control" rows="6"
+                                placeholder="Describe detalladamente el problema o solicitud" required></textarea>
                             <div id="error-descripcion" class="form-error"></div>
                         </div>
 
@@ -71,10 +77,9 @@
                             </div>
 
                             <div class="filter-item">
-                                <label for="estado" class="form-label">Estado Inicial</label>
-                                <select id="estado" class="form-control" required>
-                                    <!-- Se poblará de la API, pero el primero será por defecto -->
-                                </select>
+                                <label for="estado-display" class="form-label">Estado Inicial</label>
+                                <input type="text" id="estado-display" class="form-control" value="Abierto" readonly>
+                                <input type="hidden" id="estado" value="">
                                 <div id="error-estado" class="form-error"></div>
                             </div>
                         </div>
@@ -97,4 +102,5 @@
     <!-- Page Controller -->
     <script type="module" src="../js/presentation/controllers/ticket-create-controller.js"></script>
 </body>
+
 </html>

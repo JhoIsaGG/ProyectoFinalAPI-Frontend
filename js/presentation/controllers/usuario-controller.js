@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectRol = document.getElementById('rol_id');
     const selectDepto = document.getElementById('departamento_id');
     const selectEstado = document.getElementById('estado');
+    const grupoEstado = document.getElementById('group-estado');
 
     // Agente
     const groupCategoriasAgente = document.getElementById('group-categorias-agente');
@@ -179,6 +180,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         inputId.value = '';
         inputPassword.required = true;
         groupCategoriasAgente.style.display = 'none';
+        selectEstado.value = '1';
+        grupoEstado.style.display = 'none';
 
         // Desmarcar todas las categorías
         const checkboxesCategorias = contenedorCategorias.querySelectorAll('input[name="categorias_soporte"]');
@@ -196,6 +199,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         form.reset();
         inputId.value = id;
         inputPassword.required = false; // No obligatorio al editar
+        grupoEstado.style.display = 'block';
         hideErrors();
         alertErrorModal.style.display = 'none';
 

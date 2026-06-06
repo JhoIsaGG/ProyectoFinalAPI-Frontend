@@ -30,29 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
         adminMenuHtml = `
             <div class="menu-category">Administración</div>
             
-            <a href="/proyectofinalapi/Frontend/views/usuarios.html" class="menu-item ${isActive('usuarios.html')}">
+            <a href="/Proyectofinal/Frontend/views/usuarios.html" class="menu-item ${isActive('usuarios.html')}">
                 ${svgUsers} Usuarios
             </a>
             
-            <a href="/proyectofinalapi/Frontend/views/roles.html" class="menu-item ${isActive('roles.html')}">
+            <a href="/Proyectofinal/Frontend/views/roles.html" class="menu-item ${isActive('roles.html')}">
                 ${svgRoles} Roles
             </a>
             
-            <a href="/proyectofinalapi/Frontend/views/departamentos.html" class="menu-item ${isActive('departamentos.html')}">
+            <a href="/Proyectofinal/Frontend/views/departamentos.html" class="menu-item ${isActive('departamentos.html')}">
                 ${svgDept} Departamentos
             </a>
             
             <div class="menu-category">Catálogos de Ticket</div>
             
-            <a href="/proyectofinalapi/Frontend/views/categorias.html" class="menu-item ${isActive('categorias.html')}">
+            <a href="/Proyectofinal/Frontend/views/categorias.html" class="menu-item ${isActive('categorias.html')}">
                 ${svgCat} Categorías
             </a>
             
-            <a href="/proyectofinalapi/Frontend/views/estados.html" class="menu-item ${isActive('estados.html')}">
+            <a href="/Proyectofinal/Frontend/views/estados.html" class="menu-item ${isActive('estados.html')}">
                 ${svgStatus} Estados
             </a>
             
-            <a href="/proyectofinalapi/Frontend/views/prioridades.html" class="menu-item ${isActive('prioridades.html')}">
+            <a href="/Proyectofinal/Frontend/views/prioridades.html" class="menu-item ${isActive('prioridades.html')}">
                 ${svgPrio} Prioridades
             </a>
         `;
@@ -66,11 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="sidebar-menu">
                 <div class="menu-category">Panel Principal</div>
                 
-                <a href="/proyectofinalapi/Frontend/views/dashboard.html" class="menu-item ${isActive('dashboard.html')} ${isActive('ticket-detalle.html')}">
+                <a href="/Proyectofinal/Frontend/views/dashboard.html" class="menu-item ${isActive('dashboard.html')} ${isActive('ticket-detalle.html')}">
                     ${svgDashboard} Bandeja de Tickets
                 </a>
                 
-                <a href="/proyectofinalapi/Frontend/views/ticket-crear.html" class="menu-item ${isActive('ticket-crear.html')}">
+                <a href="/Proyectofinal/Frontend/views/ticket-crear.html" class="menu-item ${isActive('ticket-crear.html')}">
                     ${svgPlus} Crear Ticket
                 </a>
 

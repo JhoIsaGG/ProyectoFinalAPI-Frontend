@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = `Editar Usuario #${id}`;
         form.reset();
         inputId.value = id;
-        inputPassword.required = false; // No obligatorio al editar
+        inputPassword.required = true; // Obligatorio al editar para poder guardar
         grupoEstado.style.display = 'block';
         hideErrors();
         alertErrorModal.style.display = 'none';
@@ -259,15 +259,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             updated_by: currentUser.id
         };
 
-        // Si se ingresó contraseña, o es creación (donde es required), adjuntarla
-        if (inputPassword.value) {
-            payload.password = inputPassword.value;
-        }
-
-        if (!isEditing && !inputPassword.value) {
-            showModalError('La contraseña es obligatoria al crear un usuario.');
+        // La contraseña es obligatoria tanto al crear como al editar
+        if (!inputPassword.value) {
+            showModalError('La contraseña es obligatoria.');
             return;
         }
+        payload.password = inputPassword.value;
 
         // Si es agente, extraer categorías
         if (Number(selectRol.value) === 2) {

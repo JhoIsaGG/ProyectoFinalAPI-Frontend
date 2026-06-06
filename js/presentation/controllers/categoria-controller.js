@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputId = document.getElementById('item-id');
     const inputNombre = document.getElementById('nombre');
     const selectEstado = document.getElementById('estado');
+    const grupoEstado = document.getElementById('group-estado');
 
     // Botones modal
     const btnNuevo = document.getElementById('btn-nuevo-catalogo');
@@ -90,6 +91,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = 'Nueva Categoría';
         form.reset();
         inputId.value = '';
+        selectEstado.value = '1';
+        grupoEstado.style.display = 'none';
         hideErrors();
         alertErrorModal.style.display = 'none';
         modal.classList.add('show');
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalTitle.innerText = `Editar Categoría #${id}`;
         form.reset();
         inputId.value = id;
+        grupoEstado.style.display = 'block';
         hideErrors();
         alertErrorModal.style.display = 'none';
 
